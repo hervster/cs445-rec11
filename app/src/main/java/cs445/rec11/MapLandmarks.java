@@ -28,6 +28,9 @@ public class MapLandmarks extends HashingDictionary<Tuple, String>{
 		public void addLandmark(String value, double firstComponent, double secondComponent){
 			// TODO: implement this method
 			// to add a pair of a landmark and its key (which has 2 components)
+
+			Tuple newTuple = new Tuple(firstComponent, secondComponent);
+			super.add(newTuple, value);
 		}
 
 		/**
@@ -48,6 +51,14 @@ public class MapLandmarks extends HashingDictionary<Tuple, String>{
 		 */
 		public void removeLandmark(String value){
 			// TODO: implement this method using itertors to remove a landmark
+
+			Iterator<Tuple> iter = super.iterator();
+
+			while (iter.hasNext() )
+			{
+				Tuple currKey = iter.next();
+				if ( super.getValue(currKey).equals(value) ) { super.remove(currKey); }
+			}
 		}
 
 		/**
@@ -77,5 +88,16 @@ public class MapLandmarks extends HashingDictionary<Tuple, String>{
 		 */
 		public void printAllLandmarks(){
 			// TODO: implement this method to print all landmarks in your dictionary
+			Iterator<Tuple> iter = super.iterator();
+			System.out.println("Landmarks");
+
+			while (iter.hasNext() )
+			{
+				Tuple currKey = iter.next();
+				String currValue = super.getValue(currKey);
+
+				System.out.println(currValue + " \t at coordinates(" +currKey.getFirstComponent() + ", " + currKey.getSecondComponent() +")");
+			}
+
 		}
 }
